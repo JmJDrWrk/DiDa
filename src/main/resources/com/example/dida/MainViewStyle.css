@@ -1,0 +1,82 @@
+.window {
+    -fx-background-color: #3333339f;
+}
+
+#window1 {
+    -fx-background-color: #41414160;
+}
+.gridpane {
+    -fx-background-color: #308854;
+}
+.table {
+    -fx-background-color: #3b4655;
+    -fx-text-fill: rgb(182, 28, 28);
+}
+
+.button {
+    -fx-background-color: #3535357e;
+    -fx-background-radius: 10px;
+    -fx-text-fill: #fff;
+    -fx-alignment: center;
+
+}
+.vbox {
+    -fx-background-color: #626c7c;  
+}
+
+.borderPane {
+    -fx-background-color: #d6df64;
+}
+.light_text {
+    -fx-text-fill: #626c7c;  
+}
+
+.pane {
+    -fx-background-color: #25a9c0;
+}
+
+.image_layer {
+    -fx-background-image: url("img/background_image.jpg");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 1054 604;
+    /* -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);  */
+}
+
+.text_field{
+    -fx-background-color: #533b55;
+    -fx-text-fill: rgb(201, 201, 201);
+}
+
+.togglebutton {
+    -fx-background-color: #533b55;
+    -fx-text-fill: #b61c1c;
+}
+
+.webview {
+    -fx-background-color: #231d24;
+    -fx-text-fill: #b61c1c59;
+}
+
+.profile_image {
+    -fx-background-color: #25a9c0;
+    -fx-background-image: url("img/programador_estandar.jpg");
+    -fx-background-repeat: stretch;   
+    -fx-background-size: 335 326;
+}
+
+#loginbutton {
+    -fx-background-color: #25c08c;
+}
+
+#profilebutton {
+    -fx-background-color: #bdb957;
+}
+
+#accessbutton {
+    -fx-background-color: #2f4572;
+}
+
+#red_text {
+    -fx-text-fill: #b61c1c;
+}
