@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="1050.0" styleClass="image_layer" stylesheets="@MainViewStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane layoutX="198.0" prefHeight="604.0" prefWidth="852.0" styleClass="right_panel" />
+      <Pane prefHeight="604.0" prefWidth="199.0" styleClass="left_panel">
+         <children>
+            <Label alignment="CENTER" layoutX="53.0" layoutY="14.0" prefHeight="17.0" prefWidth="98.0" text="Tables" textFill="WHITE" />
+            <ComboBox id="blue_label" layoutX="27.0" layoutY="37.0" prefWidth="150.0" styleClass="expansionPanel">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:id="users" fx:value="Users" />
+                        <String fx:id="guitar" fx:value="Guitars" />
+                        <String fx:id="amps" fx:value="Amplifiers"/>
+                    </FXCollections>
+                </items>
+             </ComboBox>
+         </children>
+      </Pane>
+   </children>
+</Pane>

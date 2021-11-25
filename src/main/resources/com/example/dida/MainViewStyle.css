@@ -80,3 +80,20 @@
 #red_text {
     -fx-text-fill: #b61c1c;
 }
+
+.right_panel {
+    -fx-background-color: #303131;
+}
+
+.left_panel {
+    -fx-background-color: #252525;
+}
+
+.expansionPanel {
+    -fx-background-color: #333333;
+    -fx-text-fill: #001aff;
+}
+
+#blue_label {
+    -fx-text-fill: #075fc9;
+}

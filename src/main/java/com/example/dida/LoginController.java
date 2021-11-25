@@ -132,8 +132,9 @@ public class LoginController {
     @FXML
     private void join() {
         progressIndicator.setVisible(true);
-        debugger.setVisible(true);
-        debugger.setText("loading");
+        //debugger.setVisible(true);
+        //debugger.setText("loading");
+        App.changeFXMLto("DatabaseView.fxml");
     }
 
 }
