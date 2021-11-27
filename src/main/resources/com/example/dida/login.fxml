@@ -15,6 +15,7 @@
             <Button id="loginbutton" fx:id="login" mnemonicParsing="false" onAction="#login" prefHeight="38.0" prefWidth="76.0" styleClass="button" text="Log In" />
             <TextField id="phone" fx:id="phone" layoutY="210.0" prefHeight="38.0" prefWidth="253.0" styleClass="text_field" text="617522014" />
             <Label id="red_text" fx:id="debugger1" layoutX="7.0" layoutY="255.0" prefHeight="24.0" prefWidth="253.0" textFill="#ff0808" />
+            <Button fx:id="signinbutton" layoutX="89.0" mnemonicParsing="false" onAction="#signin" prefHeight="38.0" prefWidth="76.0" styleClass="yellow_button" text="Sign In" />
          </children>
       </Pane>
       <Button id="accessbutton" fx:id="join" layoutX="814.0" layoutY="403.0" mnemonicParsing="false" onAction="#join" prefHeight="47.0" prefWidth="137.0" text="Join Database" visible="false" />

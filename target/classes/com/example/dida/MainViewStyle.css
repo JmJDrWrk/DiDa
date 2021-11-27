@@ -97,3 +97,9 @@
 #blue_label {
     -fx-text-fill: #075fc9;
 }
+
+
+.yellow_button {
+    -fx-background-color: #dfd87d;
+    -fx-text-fill: #575757;
+}

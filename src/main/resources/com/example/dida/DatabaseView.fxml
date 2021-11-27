@@ -2,26 +2,175 @@
 
 <?import java.lang.String?>
 <?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="1050.0" styleClass="image_layer" stylesheets="@MainViewStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="1050.0" styleClass="image_layer" stylesheets="@MainViewStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dida.DatabaseController">
    <children>
-      <Pane layoutX="198.0" prefHeight="604.0" prefWidth="852.0" styleClass="right_panel" />
+      <Pane layoutX="198.0" prefHeight="604.0" prefWidth="852.0" styleClass="right_panel">
+         <children>
+            <Pane prefHeight="39.0" prefWidth="852.0" styleClass="left_panel">
+               <children>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="31.0" layoutY="12.0" onMouseClicked="#add" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/19431180981536834821-128.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="66.0" layoutY="12.0" onMouseClicked="#edit" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/19653542211536834823-128.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="103.0" layoutY="12.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/15216161911536834820-128.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="766.0" layoutY="12.0" onMouseClicked="#database_settings" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/5416880981536834822-128.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="803.0" layoutY="12.0" onMouseClicked="#refresh_database" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/14446879061536834824-128.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane layoutY="39.0" prefHeight="563.0" prefWidth="852.0">
+               <children>
+                  <TableView id="table" fx:id="table" layoutX="45.0" layoutY="98.0" prefHeight="409.0" prefWidth="754.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="id" />
+                      <TableColumn prefWidth="75.0" text="nombre" />
+                        <TableColumn prefWidth="75.0" text="apellido" />
+                        <TableColumn prefWidth="75.0" text="mail" />
+                        <TableColumn prefWidth="75.0" text="contraseña" />
+                        <TableColumn prefWidth="75.0" text="id_historial" />
+                        <TableColumn prefWidth="75.0" text="admin" />
+                    </columns>
+                  </TableView>
+               </children></Pane>
+         </children></Pane>
       <Pane prefHeight="604.0" prefWidth="199.0" styleClass="left_panel">
          <children>
-            <Label alignment="CENTER" layoutX="53.0" layoutY="14.0" prefHeight="17.0" prefWidth="98.0" text="Tables" textFill="WHITE" />
-            <ComboBox id="blue_label" layoutX="27.0" layoutY="37.0" prefWidth="150.0" styleClass="expansionPanel">
-                <items>
-                    <FXCollections fx:factory="observableArrayList">
-                        <String fx:id="users" fx:value="Users" />
-                        <String fx:id="guitar" fx:value="Guitars" />
-                        <String fx:id="amps" fx:value="Amplifiers"/>
-                    </FXCollections>
-                </items>
-             </ComboBox>
+            <Label alignment="CENTER" layoutX="53.0" layoutY="112.0" prefHeight="17.0" prefWidth="98.0" text="Tables" textFill="WHITE" />
+            <VBox layoutX="9.0" layoutY="137.0" prefHeight="200.0" prefWidth="181.0" spacing="12.0" styleClass="expansionPanel">
+               <children>
+                  <Pane prefHeight="20.0" prefWidth="131.0" visible="false">
+                     <children>
+                        <Label fx:id="usersOptionPane" contentDisplay="RIGHT" layoutX="25.0" layoutY="3.0" onMouseClicked="#users_ts" prefHeight="9.0" prefWidth="38.0" text="users" textFill="#4566fc">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="2.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/15233080961536834823-128.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="20.0" prefWidth="131.0">
+                     <children>
+                        <Label contentDisplay="RIGHT" layoutX="25.0" layoutY="3.0" onMouseClicked="#guitars_ts" prefHeight="20.0" prefWidth="67.0" text="guitars" textFill="#4566fc">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="2.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/225838091536834822-128.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="20.0" prefWidth="131.0">
+                     <children>
+                        <Label contentDisplay="RIGHT" layoutX="25.0" layoutY="3.0" onMouseClicked="#amps_ts" prefHeight="20.0" prefWidth="57.0" text="amps" textFill="#4566fc">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="2.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/225838091536834822-128.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="20.0" prefWidth="131.0">
+                     <children>
+                        <Label contentDisplay="RIGHT" layoutX="25.0" layoutY="3.0" prefHeight="20.0" prefWidth="147.0" text="users(admin)" textFill="#4566fc">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="2.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/12247970041536834821-128.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="20.0" prefWidth="131.0">
+                     <children>
+                        <Label contentDisplay="RIGHT" layoutX="25.0" layoutY="3.0" prefHeight="20.0" prefWidth="86.0" text="Error Table" textFill="#4566fc">
+                           <opaqueInsets>
+                              <Insets />
+                           </opaqueInsets>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="2.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/11328750001536834821-128.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children>
+               <padding>
+                  <Insets left="25.0" right="25.0" top="10.0" />
+               </padding>
+               <opaqueInsets>
+                  <Insets left="10.0" />
+               </opaqueInsets>
+            </VBox>
+            <Label alignment="CENTER" layoutX="6.0" layoutY="582.0" onMouseClicked="#comp_info" prefHeight="17.0" prefWidth="193.0" text="Version: 1.1.1.1" textFill="#3280ff" />
          </children>
       </Pane>
+      <Label alignment="CENTER" layoutX="53.0" layoutY="11.0" prefHeight="17.0" prefWidth="98.0" text="Databases" textFill="WHITE" />
+      <ComboBox id="blue_label" layoutX="27.0" layoutY="39.0" prefWidth="150.0" styleClass="expansionPanel">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:id="users1" fx:value="Users" />
+               <String fx:id="guitar1" fx:value="Guitars" />
+               <String fx:id="amps1" fx:value="Amplifiers" />
+            </FXCollections>
+         </items>
+      </ComboBox>
    </children>
 </Pane>

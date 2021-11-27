@@ -8,13 +8,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class LoginController {
+	public static Users current_user;
+	private String DATABASE = "jdbc:h2:E:/DATABASES/database1.mv";
+	
     @FXML TextField user;
     @FXML TextField pass;
     @FXML TextField phone;
@@ -38,9 +46,53 @@ public class LoginController {
     //head by brain
     ObservableList<Node> children;
 
+    
+    @FXML 
+    private void signin() {
+    	System.out.println("Sign in");
+    	
+    	
+    	
+    }
+    
+    
     @FXML
     private void login(){
-        if(user.getText().equals("admin") && pass.getText().toString().equals("1234")){
+
+    	LoginController.current_user = null;
+    	
+    	//registered user and password
+    	String db_user = user.getText().toString();
+    	String db_pass = null;
+
+    	
+        try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
+            Statement statement = conexionDataBase.createStatement();
+        	ResultSet rs = statement.executeQuery("SELECT * FROM USERS WHERE name = '" + user.getText().toString()+"';");
+        	
+        	while(rs.next()) {
+        		System.out.println("id: " + rs.getInt("id") + "\n\tname: " + rs.getString("name"));
+        		db_pass = rs.getString("pass");
+        		System.out.println("The pass for user " + db_user + " is " + db_pass);
+                Users user = new Users();
+                
+                user.setId_user(rs.getInt("id"));
+                user.setName(rs.getString("name"));
+                user.setSurname(rs.getString("surname"));
+                user.setMail(rs.getString("mail"));
+                user.setIsadmin(rs.getString("isadmin"));
+                user.setPass(rs.getString("pass"));
+                user.setId_historial(rs.getString("id_h"));
+           
+                LoginController.current_user = user;
+
+        	}
+            System.out.println("devuelto");
+            System.out.println("user: " + LoginController.current_user + " name: " + LoginController.current_user.getName() + " isadmin: " + LoginController.current_user.isIsadmin());
+        }catch (Exception e) {e.printStackTrace();System.out.println("Devolucion 2 fallida");}
+    	
+    	
+        if(pass.getText().toString().equals(db_pass)){
             //Show logged part
             join.setVisible     (true);
             account.setVisible  (true);
@@ -53,11 +105,16 @@ public class LoginController {
             phone.setVisible(false);
             debugger1.setVisible(false);
             login.setVisible(false);
-
+            
+            //Unlocking if admin
+            
         }else{
             debugger1.setText("User and password invalid");
         }
     }
+    
+   
+    
     @FXML
     private void account(){
         System.out.println("account button clicked");
@@ -137,5 +194,11 @@ public class LoginController {
         App.changeFXMLto("DatabaseView.fxml");
     }
 
+    public void hacer(MouseEvent mouseEvent) {
+        System.out.println("hecho");
+    }
+    
+
+    
 }
 
