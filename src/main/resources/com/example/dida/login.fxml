@@ -11,7 +11,7 @@
       <Pane fx:id="leftPane" layoutX="146.0" layoutY="145.0" prefHeight="448.0" prefWidth="327.0">
          <children>
             <TextField id="user" fx:id="user" layoutY="66.0" prefHeight="38.0" prefWidth="253.0" styleClass="text_field" text="admin" />
-            <TextField id="pass" fx:id="pass" layoutY="138.0" prefHeight="38.0" prefWidth="253.0" styleClass="text_field" text="1234" />
+            <TextField id="pass" fx:id="pass" layoutY="138.0" prefHeight="38.0" prefWidth="253.0" styleClass="text_field" text="admin" />
             <Button id="loginbutton" fx:id="login" mnemonicParsing="false" onAction="#login" prefHeight="38.0" prefWidth="76.0" styleClass="button" text="Log In" />
             <TextField id="phone" fx:id="phone" layoutY="210.0" prefHeight="38.0" prefWidth="253.0" styleClass="text_field" text="617522014" />
             <Label id="red_text" fx:id="debugger1" layoutX="7.0" layoutY="255.0" prefHeight="24.0" prefWidth="253.0" textFill="#ff0808" />

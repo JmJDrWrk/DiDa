@@ -33,7 +33,7 @@ public class DatabaseController implements Initializable{
 	private String DATABASE = "jdbc:h2:E:/DATABASES/database1.mv";
 	
 	
-    //@FXML Pane usersOptionPane;
+    @FXML Pane usersOptionPane;
 	@FXML TableView<Users> table;
 
     public void add(MouseEvent mouseEvent) {
@@ -185,6 +185,7 @@ public class DatabaseController implements Initializable{
                 
                 System.out.println("User: " + user.getId_user() + " added");
             }
+            configurarTamanhoColumnas();
             table.setItems(users_list);
             
         }catch(Exception e){
@@ -238,23 +239,23 @@ public class DatabaseController implements Initializable{
 		// TODO Auto-generated method stub
 		if(LoginController.current_user.isIsadmin().equals("true")) {
 			System.out.println("is admin");
-			//usersOptionPane.setVisible(true);
+			usersOptionPane.setVisible(true);
 		}else {
 			System.out.println("is admin was: " + LoginController.current_user.isIsadmin());
 		}
 	}
-//    private void configurarTamanhoColumnas() {
-//        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-//        ObservableList<TableColumn<Users, ?>> columnas = table.getColumns();
-//        columnas.get(0).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
-//        columnas.get(1).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
-//        columnas.get(2).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
-//        columnas.get(3).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
-//        columnas.get(4).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
-//        columnas.get(5).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
-//        columnas.get(6).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
-//        columnas.get(7).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
-//    }
+    private void configurarTamanhoColumnas() {
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        ObservableList<TableColumn<Users, ?>> columnas = table.getColumns();
+        columnas.get(0).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
+        columnas.get(1).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
+        columnas.get(2).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
+        columnas.get(3).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
+        columnas.get(4).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
+        columnas.get(5).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
+        columnas.get(6).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
+        columnas.get(7).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
+    }
 
     
     
