@@ -127,11 +127,25 @@ public class DatabaseController implements Initializable{
 
     public void refresh_database(MouseEvent mouseEvent) {
         System.out.println("Refreshing data on gui");
+    	try(Connection conexionDataBase = 
+                DriverManager.getConnection(DATABASE, "root","")){
+                Statement statement = conexionDataBase.createStatement();
+                String i1 = "delete from users where id <10000";
+
+        		statement.executeUpdate(i1);
+ 
+        		System.out.println("SQL: " + i1);
+        		System.out.println("DATOS INSERTADOS EXITOSAMENTE");
+               
+            }catch(Exception e){
+                e.printStackTrace();
+                System.out.println("DATOS INSERTADOS FALLIDO");
+            }
     }
     
-    private void changeTable(String from, String to) {
+    private void changeTable(String fxml) {
         
-        System.out.println("CREATING " + to + " TABLE");
+        System.out.println("CREATING " + fxml + " TABLE");
         
         //hide by children
         ObservableList<Node> children = parent_table.getChildren();
@@ -140,13 +154,13 @@ public class DatabaseController implements Initializable{
         TableView<Users> oldTable = null;
         TableView<Users> newTable = null;
         
-        try {oldTable = FXMLLoader.load(getClass().getResource(from + ".fxml")); 
+        try {oldTable = FXMLLoader.load(getClass().getResource(fxml + ".fxml")); 
         	oldTable.setVisible(false);}
         catch (IOException e1) {
         	System.out.println("table not found");} 
         
         try {
-        	newTable = FXMLLoader.load(getClass().getResource(to + ".fxml"));
+        	newTable = FXMLLoader.load(getClass().getResource(fxml + ".fxml"));
         	table = newTable;
         }
         catch (IOException e1) {e1.printStackTrace(); System.out.println("newTable error");}
@@ -157,7 +171,7 @@ public class DatabaseController implements Initializable{
     
     public void users_ts(MouseEvent mouseEvent) {
     	//Cambiar a tabla usuarios
-		changeTable("users_table","users_table");
+		changeTable("users_table");
 
         
     	//DELETE_USERS();
@@ -182,12 +196,12 @@ public class DatabaseController implements Initializable{
 
 	public void guitars_ts(MouseEvent mouseEvent) {
 		//Cambiar a tabla guitarras
-		changeTable("guitars_table","guitars_table");
+		changeTable("guitars_table");
     }
 
     public void amps_ts(MouseEvent mouseEvent) {
     	//Cambiar a tabla amps
-		changeTable("amps_table","amps_table");
+		changeTable("amps_table");
     }
 
     public void comp_info(MouseEvent mouseEvent) {

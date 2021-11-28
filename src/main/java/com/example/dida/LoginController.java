@@ -56,7 +56,7 @@ public class LoginController {
     	try(Connection conexionDataBase = 
                 DriverManager.getConnection(DATABASE, "root","")){
                 Statement statement = conexionDataBase.createStatement();
-                String i1 = String.format("INSERT INTO USERS VALUES('100','%s', 'none', 'admin@', 'false', '%s','0');",user.getText(), pass.getText());
+                String i1 = String.format("INSERT INTO USERS VALUES('100','%s', 'none', 'admin@', 'true', '%s','0');",user.getText(), pass.getText());
 
         		statement.executeUpdate(i1);
  
