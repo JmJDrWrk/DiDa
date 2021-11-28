@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
@@ -34,8 +35,78 @@ public class DatabaseController implements Initializable{
 	
 	
     @FXML Pane usersOptionPane;
+    
 	@FXML TableView<Users> table;
-
+    @FXML TableColumn<Users, String> id_col;
+    @FXML TableColumn<Users, String> name_col;
+    @FXML TableColumn<Users, String> surname_col;
+    @FXML TableColumn<Users, String> pass_col;
+    @FXML TableColumn<Users, String> his_col;
+    @FXML TableColumn<Users, String> admin_col;
+    
+    
+    public void GET_USERS() {
+        try(Connection conexionDB = DriverManager.getConnection(DATABASE, "root","")){
+            Statement statement = conexionDB.createStatement();
+            String sql = "SELECT * FROM users ORDER BY id";
+            ResultSet resultSet = statement.executeQuery(sql);
+            ObservableList<Users> users_list = FXCollections.observableArrayList();
+            
+            while(resultSet.next()){
+                Users user = new Users();
+                
+                user.setId_user(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setSurname(resultSet.getString("surname"));
+                user.setMail(resultSet.getString("mail"));
+                user.setIsadmin(resultSet.getString("isadmin"));
+                user.setPass(resultSet.getString("pass"));
+                user.setId_historial(resultSet.getString("id_h"));
+           
+                users_list.add(user);
+                
+                System.out.println("User: " + user.getId_user() + " added");
+            }
+            //table.setEditable(true);
+            //table.set
+            //configurarTamanhoColumnas();
+            //table.setItems(users_list);
+            //table.refresh();
+            
+            table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+            
+            
+            
+            
+            
+//            TableView<Users> table = new TableView<Users>();
+//    		
+//    		TableColumn<Users, String> firstNameColumn = new TableColumn<Users, String>("First Name");
+//    		firstNameColumn.setCellValueFactory(new PropertyValueFactory<Users, String>("firstName"));
+//    		
+//    		TableColumn<Users, String> lastNameColumn = new TableColumn<Users, String>("Last Name");
+//    		lastNameColumn.setCellValueFactory(new PropertyValueFactory<Users, String>("lastName"));
+//    		
+//    		TableColumn<Users, Integer> ageColumn = new TableColumn<Users, Integer>("Age");
+//    		ageColumn.setCellValueFactory(new PropertyValueFactory<Users, Integer>("age"));
+//    		
+//    		table.getColumns().add(firstNameColumn);
+//    		table.getColumns().add(lastNameColumn);
+//    		table.getColumns().add(ageColumn);
+//    		
+//    		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+//    		
+//    		table.getItems().add(new Users("Buggs", "Bunny", 79));
+//    		table.getItems().add(new Users("Daffy", "Duck", 83));
+//    		table.getItems().add(new Users("Foghorn", "Leghorn", 74));
+//    		table.getItems().add(new Users("Elmer", "Fudd", 83));
+//    		table.getItems().add(new Users("Tweety", "Bird", 73));
+    		
+        }catch(Exception e){
+            e.printStackTrace();
+            System.out.println("DATOS INSERTADOS FALLIDO");
+        }
+    }
     public void add(MouseEvent mouseEvent) {
         System.out.println("Adding selected  -- ONLY IF A TABLE SELECTED\n\tDISPLAY ADD TO TABLE WINDOW");
 		
@@ -117,7 +188,7 @@ public class DatabaseController implements Initializable{
     	//DELETE_USERS();
     	//CREATE(USERS_CREATE);
     	//INSERT();
-    	//GET_USERS();
+    	GET_USERS();
 
         System.out.println("MOSTRANDO DATOS DE USERS");  
         
@@ -162,37 +233,7 @@ public class DatabaseController implements Initializable{
         }
     
     }
-    
-    public void GET_USERS() {
-        try(Connection conexionDB = DriverManager.getConnection(DATABASE, "root","")){
-            Statement statement = conexionDB.createStatement();
-            String sql = "SELECT * FROM users ORDER BY id";
-            ResultSet resultSet = statement.executeQuery(sql);
-            ObservableList<Users> users_list = FXCollections.observableArrayList();
-            
-            while(resultSet.next()){
-                Users user = new Users();
-                
-                user.setId_user(resultSet.getInt("id"));
-                user.setName(resultSet.getString("name"));
-                user.setSurname(resultSet.getString("surname"));
-                user.setMail(resultSet.getString("mail"));
-                user.setIsadmin(resultSet.getString("isadmin"));
-                user.setPass(resultSet.getString("pass"));
-                user.setId_historial(resultSet.getString("id_h"));
-           
-                users_list.add(user);
-                
-                System.out.println("User: " + user.getId_user() + " added");
-            }
-            configurarTamanhoColumnas();
-            table.setItems(users_list);
-            
-        }catch(Exception e){
-            e.printStackTrace();
-            System.out.println("DATOS INSERTADOS FALLIDO");
-        }
-    }
+
  
     public void DELETE_USERS() {
     	String sql = "DROP TABLE users";
@@ -254,7 +295,7 @@ public class DatabaseController implements Initializable{
         columnas.get(4).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
         columnas.get(5).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
         columnas.get(6).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
-        columnas.get(7).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
+        //columnas.get(7).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
     }
 
     
