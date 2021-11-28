@@ -2,22 +2,23 @@ package com.example.dida;
 
 public class Users {
 	
-	private int id_user;
+	private int id;
 	private String name;
 	private String surname;
 	private String mail;
 	private String isadmin;
 	private String pass;
-	private String id_historial;
+	private String idh;
 	
 	public Users() {
 		super();
 	}
-	public int getId_user() {
-		return id_user;
+
+	public int getId() {
+		return id;
 	}
-	public void setId_user(int id_user) {
-		this.id_user = id_user;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getName() {
 		return name;
@@ -49,11 +50,11 @@ public class Users {
 	public void setPass(String pass) {
 		this.pass = pass;
 	}
-	public String getId_historial() {
-		return id_historial;
+	public String getId_h() {
+		return idh;
 	}
-	public void setId_historial(String id_historial) {
-		this.id_historial = id_historial;
+	public void setId_h(String id_h) {
+		this.idh = id_h;
 	}
 
 	

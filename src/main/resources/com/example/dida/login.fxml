@@ -6,7 +6,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="1050.0" styleClass="image_layer" stylesheets="@MainViewStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dida.LoginController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#login" prefHeight="604.0" prefWidth="1050.0" styleClass="image_layer" stylesheets="@MainViewStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dida.LoginController">
    <children>
       <Pane fx:id="leftPane" layoutX="146.0" layoutY="145.0" prefHeight="448.0" prefWidth="327.0">
          <children>

@@ -5,8 +5,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -48,17 +46,7 @@
             </Pane>
             <Pane layoutY="39.0" prefHeight="563.0" prefWidth="852.0">
                <children>
-                  <TableView id="table" fx:id="table" layoutX="45.0" layoutY="98.0" prefHeight="409.0" prefWidth="754.0">
-                    <columns>
-                      	<TableColumn fx:id="id_col" prefWidth="75.0" text="id" />
-                      	<TableColumn fx:id="name_col" prefWidth="75.0" text="nombre" />
-                        <TableColumn fx:id="surname_col" prefWidth="75.0" text="apellido" />
-                        <TableColumn fx:id="mail_col" prefWidth="75.0" text="mail" />
-                        <TableColumn fx:id="pass_col" prefWidth="75.0" text="contraseña" />
-                        <TableColumn fx:id="hist_col" prefWidth="75.0" text="id_historial" />
-                        <TableColumn fx:id="admin_col" prefWidth="75.0" text="admin" />
-                    </columns>
-                  </TableView>
+                  <Pane fx:id="parent_table" layoutX="45.0" layoutY="98.0" />
                </children></Pane>
          </children></Pane>
       <Pane prefHeight="604.0" prefWidth="199.0" styleClass="left_panel">

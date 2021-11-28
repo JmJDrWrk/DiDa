@@ -1,5 +1,6 @@
 package com.example.dida;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,7 +11,9 @@ import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -37,15 +40,15 @@ public class DatabaseController implements Initializable{
     @FXML Pane usersOptionPane;
     
 	@FXML TableView<Users> table;
-    @FXML TableColumn<Users, String> id_col;
-    @FXML TableColumn<Users, String> name_col;
-    @FXML TableColumn<Users, String> surname_col;
-    @FXML TableColumn<Users, String> pass_col;
-    @FXML TableColumn<Users, String> his_col;
-    @FXML TableColumn<Users, String> admin_col;
+	
+	@FXML Pane parent_table;
+	
+
     
     
     public void GET_USERS() {
+    	System.out.println("data: " + usersOptionPane.getScene().getRoot());
+    	
         try(Connection conexionDB = DriverManager.getConnection(DATABASE, "root","")){
             Statement statement = conexionDB.createStatement();
             String sql = "SELECT * FROM users ORDER BY id";
@@ -53,60 +56,35 @@ public class DatabaseController implements Initializable{
             ObservableList<Users> users_list = FXCollections.observableArrayList();
             
             while(resultSet.next()){
+            	
                 Users user = new Users();
                 
-                user.setId_user(resultSet.getInt("id"));
+                user.setId(resultSet.getInt("id"));
                 user.setName(resultSet.getString("name"));
                 user.setSurname(resultSet.getString("surname"));
                 user.setMail(resultSet.getString("mail"));
                 user.setIsadmin(resultSet.getString("isadmin"));
                 user.setPass(resultSet.getString("pass"));
-                user.setId_historial(resultSet.getString("id_h"));
+                user.setId_h(resultSet.getString("id_h"));
            
                 users_list.add(user);
-                
-                System.out.println("User: " + user.getId_user() + " added");
+
+                System.out.println("User: " + user.getId() + " added");
             }
-            //table.setEditable(true);
+            table.setEditable(true);
             //table.set
             //configurarTamanhoColumnas();
-            //table.setItems(users_list);
+            table.setItems(users_list);
             //table.refresh();
             
-            table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-            
-            
-            
-            
-            
-//            TableView<Users> table = new TableView<Users>();
-//    		
-//    		TableColumn<Users, String> firstNameColumn = new TableColumn<Users, String>("First Name");
-//    		firstNameColumn.setCellValueFactory(new PropertyValueFactory<Users, String>("firstName"));
-//    		
-//    		TableColumn<Users, String> lastNameColumn = new TableColumn<Users, String>("Last Name");
-//    		lastNameColumn.setCellValueFactory(new PropertyValueFactory<Users, String>("lastName"));
-//    		
-//    		TableColumn<Users, Integer> ageColumn = new TableColumn<Users, Integer>("Age");
-//    		ageColumn.setCellValueFactory(new PropertyValueFactory<Users, Integer>("age"));
-//    		
-//    		table.getColumns().add(firstNameColumn);
-//    		table.getColumns().add(lastNameColumn);
-//    		table.getColumns().add(ageColumn);
-//    		
-//    		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-//    		
-//    		table.getItems().add(new Users("Buggs", "Bunny", 79));
-//    		table.getItems().add(new Users("Daffy", "Duck", 83));
-//    		table.getItems().add(new Users("Foghorn", "Leghorn", 74));
-//    		table.getItems().add(new Users("Elmer", "Fudd", 83));
-//    		table.getItems().add(new Users("Tweety", "Bird", 73));
-    		
+            //table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		
         }catch(Exception e){
             e.printStackTrace();
             System.out.println("DATOS INSERTADOS FALLIDO");
         }
     }
+    
     public void add(MouseEvent mouseEvent) {
         System.out.println("Adding selected  -- ONLY IF A TABLE SELECTED\n\tDISPLAY ADD TO TABLE WINDOW");
 		
@@ -120,39 +98,7 @@ public class DatabaseController implements Initializable{
 		String insertar1 = "INSERT INTO ADDRESS VALUES('John', 'Miller', 'Berne', '123 456 789');";
 		String insertar2 = "INSERT INTO ADDRESS VALUES('Philip', 'Jones', 'Berne', '123 012 345');";
 		String obtener = "SELECT * FROM USERS;";
-		
-//		//CREAR TABLA
-//
-//        try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
-//            Statement statement = conexionDataBase.createStatement();
-//        	statement.executeUpdate(crear);
-//            System.out.println("Tabla creada");
-//        }catch (Exception e) {
-//        	e.printStackTrace();
-//        	System.out.println("Creacion de la tabla fallida");
-//        }
-//		
-//		//INSERTAR 1
-//        try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
-//            Statement statement = conexionDataBase.createStatement();
-//        	statement.executeUpdate(insertar1);
-//            System.out.println("Datos 1 insertados");
-//        }catch (Exception e) {
-//        	e.printStackTrace();
-//        	System.out.println("Insecion 1 fallida");
-//        }
-//		
-//        
-//		//INSERTAR 2
-//        try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
-//            Statement statement = conexionDataBase.createStatement();
-//        	statement.executeUpdate(insertar2);
-//            System.out.println("Datos 2 insertados");
-//        }catch (Exception e) {
-//        	e.printStackTrace();
-//        	System.out.println("Insecion 2 fallida");
-//        }
-//        
+
 		//DEVOLVER 2
         try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
             Statement statement = conexionDataBase.createStatement();
@@ -175,7 +121,6 @@ public class DatabaseController implements Initializable{
         System.out.println("Delete selected  -- ONLY IF A TABLE REGISTRY SELECTED");
     }
 
-    
     public void database_settings(MouseEvent mouseEvent) {
         System.out.println("modify working mode");
     }
@@ -183,8 +128,38 @@ public class DatabaseController implements Initializable{
     public void refresh_database(MouseEvent mouseEvent) {
         System.out.println("Refreshing data on gui");
     }
+    
+    private void changeTable(String from, String to) {
+        
+        System.out.println("CREATING " + to + " TABLE");
+        
+        //hide by children
+        ObservableList<Node> children = parent_table.getChildren();
+        try{children.get(0).setVisible(false);}catch(Exception e) {System.out.println("No se pudo obtener el elemento hijo");}
+        
+        TableView<Users> oldTable = null;
+        TableView<Users> newTable = null;
+        
+        try {oldTable = FXMLLoader.load(getClass().getResource(from + ".fxml")); 
+        	oldTable.setVisible(false);}
+        catch (IOException e1) {
+        	System.out.println("table not found");} 
+        
+        try {
+        	newTable = FXMLLoader.load(getClass().getResource(to + ".fxml"));
+        	table = newTable;
+        }
+        catch (IOException e1) {e1.printStackTrace(); System.out.println("newTable error");}
 
+       
+        parent_table.getChildren().add(newTable);
+    }
+    
     public void users_ts(MouseEvent mouseEvent) {
+    	//Cambiar a tabla usuarios
+		changeTable("users_table","users_table");
+
+        
     	//DELETE_USERS();
     	//CREATE(USERS_CREATE);
     	//INSERT();
@@ -205,13 +180,14 @@ public class DatabaseController implements Initializable{
         }
     }
 
-
 	public void guitars_ts(MouseEvent mouseEvent) {
-        System.out.println("Showing guitars table\n\tSELECT * FROM guitars");
+		//Cambiar a tabla guitarras
+		changeTable("guitars_table","guitars_table");
     }
 
     public void amps_ts(MouseEvent mouseEvent) {
-        System.out.println("Showing amps table\n\tSELECT * FROM amps");
+    	//Cambiar a tabla amps
+		changeTable("amps_table","amps_table");
     }
 
     public void comp_info(MouseEvent mouseEvent) {
@@ -219,8 +195,6 @@ public class DatabaseController implements Initializable{
         //returning to main menu
         App.changeFXMLto("login.fxml");
     }
-    
-    
     
     public void CREATE(String sql) {
         try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
@@ -234,7 +208,6 @@ public class DatabaseController implements Initializable{
     
     }
 
- 
     public void DELETE_USERS() {
     	String sql = "DROP TABLE users";
         try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
@@ -277,15 +250,23 @@ public class DatabaseController implements Initializable{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		
+		//CHECK IF USER IS ADMIN
 		if(LoginController.current_user.isIsadmin().equals("true")) {
 			System.out.println("is admin");
 			usersOptionPane.setVisible(true);
 		}else {
 			System.out.println("is admin was: " + LoginController.current_user.isIsadmin());
 		}
+		
+		//NO LOAD ANY TABLE
+		
+		
+		
+		
 	}
-    private void configurarTamanhoColumnas() {
+    
+private void configurarTamanhoColumnas() {
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         ObservableList<TableColumn<Users, ?>> columnas = table.getColumns();
         columnas.get(0).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
@@ -296,6 +277,8 @@ public class DatabaseController implements Initializable{
         columnas.get(5).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
         columnas.get(6).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
         //columnas.get(7).setMaxWidth(1f * Integer.MAX_VALUE * 12.5);
+        
+        
     }
 
     

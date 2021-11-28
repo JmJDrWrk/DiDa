@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -46,12 +48,25 @@ public class LoginController {
     //head by brain
     ObservableList<Node> children;
 
-    
+
     @FXML 
     private void signin() {
     	System.out.println("Sign in");
     	
-    	
+    	try(Connection conexionDataBase = 
+                DriverManager.getConnection(DATABASE, "root","")){
+                Statement statement = conexionDataBase.createStatement();
+                String i1 = String.format("INSERT INTO USERS VALUES('100','%s', 'none', 'admin@', 'false', '%s','0');",user.getText(), pass.getText());
+
+        		statement.executeUpdate(i1);
+ 
+        		System.out.println("SQL: " + i1);
+        		System.out.println("DATOS INSERTADOS EXITOSAMENTE");
+               
+            }catch(Exception e){
+                e.printStackTrace();
+                System.out.println("DATOS INSERTADOS FALLIDO");
+            }
     	
     }
     
@@ -76,13 +91,13 @@ public class LoginController {
         		System.out.println("The pass for user " + db_user + " is " + db_pass);
                 Users user = new Users();
                 
-                user.setId_user(rs.getInt("id"));
+                user.setId(rs.getInt("id"));
                 user.setName(rs.getString("name"));
                 user.setSurname(rs.getString("surname"));
                 user.setMail(rs.getString("mail"));
                 user.setIsadmin(rs.getString("isadmin"));
                 user.setPass(rs.getString("pass"));
-                user.setId_historial(rs.getString("id_h"));
+                user.setId_h(rs.getString("id_h"));
            
                 LoginController.current_user = user;
 

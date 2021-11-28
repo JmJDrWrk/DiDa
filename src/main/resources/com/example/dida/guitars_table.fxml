@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<TableView id="table" fx:id="table" prefHeight="409.0" prefWidth="754.0" styleClass="table" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <columns>
+      <TableColumn fx:id="id_col" prefWidth="75.0" text="id_guitarra">
+         <cellValueFactory>
+            <PropertyValueFactory property="id" />
+         </cellValueFactory>
+         <graphic>
+            <ImageView fitHeight="11.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/9942705841553508652-128.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </TableColumn>
+      <TableColumn fx:id="name_col" prefWidth="75.0" text="nombre">
+         <cellValueFactory>
+            <PropertyValueFactory property="name" />
+         </cellValueFactory>
+      </TableColumn>
+      <TableColumn fx:id="surname_col" prefWidth="75.0" text="tonalidad">
+         <cellValueFactory>
+            <PropertyValueFactory property="surname" />
+         </cellValueFactory>
+      </TableColumn>
+      <TableColumn fx:id="mail_col" prefWidth="75.0" text="sided">
+         <cellValueFactory>
+            <PropertyValueFactory property="mail" />
+         </cellValueFactory>
+      </TableColumn>
+      <TableColumn fx:id="pass_col" prefWidth="75.0" text="tipo">
+         <cellValueFactory>
+            <PropertyValueFactory property="pass" />
+         </cellValueFactory>
+      </TableColumn>
+      <TableColumn fx:id="hist_col" prefWidth="75.0" text="id_historial">
+         <cellValueFactory>
+            <PropertyValueFactory property="id_h" />
+         </cellValueFactory>
+      </TableColumn>
+      <TableColumn fx:id="admin_col" prefWidth="75.0" text="admin">
+         <cellValueFactory>
+            <PropertyValueFactory property="isadmin" />
+         </cellValueFactory>
+      </TableColumn>
+   </columns>
+</TableView>
