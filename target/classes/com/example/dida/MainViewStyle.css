@@ -1,4 +1,5 @@
 .window {
+    -fx-font-family: "Courier New";
     -fx-background-color: #3333339f;
 }
 
@@ -104,6 +105,7 @@
     -fx-text-fill: #575757;
 }
 
+/* tablas */
 
 .table-view{
     -fx-background-color: #2b2b2b;

@@ -34,7 +34,7 @@ public class DatabaseController implements Initializable{
     		+"id_h VARCHAR)";
     
 	private String USERS_SELECT = "SELECT * FROM users";
-	private String DATABASE = "jdbc:h2:E:/DATABASES/database1.mv";
+	//private String DATABASE = "jdbc:h2:E:/DATABASES/database1.mv";
 	
 	
     @FXML Pane usersOptionPane;
@@ -49,7 +49,7 @@ public class DatabaseController implements Initializable{
     public void GET_USERS() {
     	System.out.println("data: " + usersOptionPane.getScene().getRoot());
     	
-        try(Connection conexionDB = DriverManager.getConnection(DATABASE, "root","")){
+        try(Connection conexionDB = DriverManager.getConnection(App.DATABASE, "root","")){
             Statement statement = conexionDB.createStatement();
             String sql = "SELECT * FROM users ORDER BY id";
             ResultSet resultSet = statement.executeQuery(sql);
@@ -94,9 +94,6 @@ public class DatabaseController implements Initializable{
 		
 		//SQL
 		
-		String crear = "CREATE TABLE ADDRESS(FIRST_NAME VARCHAR,NAME VARCHAR, CITY VARCHAR, PHONE VARCHAR);";
-		String insertar1 = "INSERT INTO ADDRESS VALUES('John', 'Miller', 'Berne', '123 456 789');";
-		String insertar2 = "INSERT INTO ADDRESS VALUES('Philip', 'Jones', 'Berne', '123 012 345');";
 		String obtener = "SELECT * FROM USERS;";
 
 		//DEVOLVER 2
@@ -128,7 +125,7 @@ public class DatabaseController implements Initializable{
     public void refresh_database(MouseEvent mouseEvent) {
         System.out.println("Refreshing data on gui");
     	try(Connection conexionDataBase = 
-                DriverManager.getConnection(DATABASE, "root","")){
+                DriverManager.getConnection(App.DATABASE, "root","")){
                 Statement statement = conexionDataBase.createStatement();
                 String i1 = "delete from users where id <10000";
 
@@ -181,7 +178,7 @@ public class DatabaseController implements Initializable{
 
         System.out.println("MOSTRANDO DATOS DE USERS");  
         
-        try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
+        try(Connection conexionDataBase = DriverManager.getConnection(App.DATABASE, "root","")){
             Statement statement = conexionDataBase.createStatement();
         	ResultSet rs = statement.executeQuery("SELECT * FROM USERS");
         	while(rs.next()) {
@@ -210,57 +207,8 @@ public class DatabaseController implements Initializable{
         App.changeFXMLto("login.fxml");
     }
     
-    public void CREATE(String sql) {
-        try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
-            Statement statement = conexionDataBase.createStatement();
-        	statement.executeUpdate(sql);
-            System.out.println("TABLA CREADA");
-        }catch (Exception e) {
-        	e.printStackTrace();
-        	System.out.println("LA CREACION DE LA TABLA DE DATOS HA FALLADO");
-        }
-    
-    }
 
-    public void DELETE_USERS() {
-    	String sql = "DROP TABLE users";
-        try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
-            Statement statement = conexionDataBase.createStatement();
-        	statement.executeUpdate(sql);
-            System.out.println("TABLA CREADA");
-        }catch (Exception e) {
-        	e.printStackTrace();
-        	System.out.println("LA ELIMINACION DE LA TABLA DE DATOS HA FALLADO");
-        }
-    }
-    
-    private void INSERT() {
-    	try(Connection conexionDataBase = 
-                DriverManager.getConnection(DATABASE, "root","")){
-                Statement statement = conexionDataBase.createStatement();
-                
-                String i1 = "INSERT INTO USERS VALUES('100','admin', 'none', 'admin@', 'true', 'admin','0');";
-                
-                String i2 = "INSERT INTO USERS VALUES('1','Jaime','Roman Gil', 'jaime@g','false','0000','0');";
-                String i3 = "INSERT INTO USERS VALUES('2','Gabi', 'Carnico', 'gabicarnico@', 'false', '4321','0');";
-                String i4 = "INSERT INTO USERS VALUES('3','Damif', 'FCB', 'rompecorazones@', 'false', 'sopaGabi','0');";
-                String i5 = "INSERT INTO USERS VALUES('4','Tekila', 'Javier Ceballos', 'AlMyLoco@', 'false', 'manin','0');";
-                String i6 = "INSERT INTO USERS VALUES('5','Roo', 'C.R.', 'Rooooooooooooo@', 'true', 'levilovers','0');";
-     
-        		statement.executeUpdate(i1);
-        		statement.executeUpdate(i2);
-        		statement.executeUpdate(i3);
-        		statement.executeUpdate(i4);
-        		statement.executeUpdate(i5);
-        		
-        		System.out.println("DATOS INSERTADOS EXITOSAMENTE");
-               
-            }catch(Exception e){
-                e.printStackTrace();
-                System.out.println("DATOS INSERTADOS FALLIDO");
-            }
-		
-	}
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

@@ -5,11 +5,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
 public class App extends Application {
-
+	static final String DATABASE = "jdbc:h2:./src/database/didadatabase";
     private static Scene scene;
 
     @Override
@@ -18,6 +19,7 @@ public class App extends Application {
         scene = new Scene(fxmlLoader.load(), 1050, 604);
         stage.setTitle("Hello!");
         stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 

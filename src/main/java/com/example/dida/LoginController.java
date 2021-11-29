@@ -3,6 +3,7 @@ package com.example.dida;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,10 +21,20 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController implements Initializable{
+	
+	private boolean show_regs_on_start = true;
+	private boolean reset_table_users_regs = false;
+	private boolean reset_table = false;
+	private boolean create_table_users = false;
+	private boolean reinsert_database = false;
+	
+	
 	public static Users current_user;
-	private String DATABASE = "jdbc:h2:E:/DATABASES/database1.mv";
+	//C:/Users/Jaime/3D Objects/ASIGNATURAS/DISEÑO INTERFACES/DiDa/src/database/didadatabase
+
 	
     @FXML TextField user;
     @FXML TextField pass;
@@ -33,6 +44,7 @@ public class LoginController {
     @FXML Label debugger;
 
     @FXML Button login;
+    @FXML Button sigin;
     @FXML Button join;
     @FXML Button account;
     @FXML Button settings;
@@ -52,21 +64,41 @@ public class LoginController {
     @FXML 
     private void signin() {
     	System.out.println("Sign in");
+    	boolean regExists = true;
     	
-    	try(Connection conexionDataBase = 
-                DriverManager.getConnection(DATABASE, "root","")){
-                Statement statement = conexionDataBase.createStatement();
-                String i1 = String.format("INSERT INTO USERS VALUES('100','%s', 'none', 'admin@', 'true', '%s','0');",user.getText(), pass.getText());
+    	//Check if reg yet exists
+        try(Connection conexionDataBase = DriverManager.getConnection(App.DATABASE, "root","")){
+            Statement statement = conexionDataBase.createStatement();
+        	ResultSet rs = statement.executeQuery(String.format("SELECT * FROM USERS WHERE name = '%s'",user.getText()));
+        	if(!rs.next()) {
+        		//System.out.println("id: " + rs.getInt("id") + "\n\tname: " + rs.getString("name"));
+        		System.out.println("empty set\n\t regExists changed to false");
+        		regExists = false;
+        	}
+            
+        }catch (Exception e) {
+        	e.printStackTrace();
+        	System.out.println("\tsearching for regs failed in sig in");
+        }
+    	//do if true
+        if(!regExists) {
+        	try(Connection conexionDataBase = 
+                    DriverManager.getConnection(App.DATABASE, "root","")){
+                    Statement statement = conexionDataBase.createStatement();
+                    String i1 = String.format("INSERT INTO USERS VALUES('100','%s', 'none', 'admin@', 'true', '%s','0');",user.getText(), pass.getText());
 
-        		statement.executeUpdate(i1);
- 
-        		System.out.println("SQL: " + i1);
-        		System.out.println("DATOS INSERTADOS EXITOSAMENTE");
-               
-            }catch(Exception e){
-                e.printStackTrace();
-                System.out.println("DATOS INSERTADOS FALLIDO");
-            }
+            		statement.executeUpdate(i1);
+     
+            		System.out.println("\tSQL: " + i1);
+            		System.out.println("\tdata inserted successfully");
+                   
+                }catch(Exception e){
+                    e.printStackTrace();
+                    System.out.println("\tdata insert failed");
+                }
+        }else {
+        	System.out.println("\tSign In skipped due to a yet existing reg");
+        }
     	
     }
     
@@ -81,7 +113,7 @@ public class LoginController {
     	String db_pass = null;
 
     	
-        try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
+        try(Connection conexionDataBase = DriverManager.getConnection(App.DATABASE, "root","")){
             Statement statement = conexionDataBase.createStatement();
         	ResultSet rs = statement.executeQuery("SELECT * FROM USERS WHERE name = '" + user.getText().toString()+"';");
         	
@@ -212,6 +244,99 @@ public class LoginController {
     public void hacer(MouseEvent mouseEvent) {
         System.out.println("hecho");
     }
+    
+    
+    private void insert_sample_users() {
+    	try(Connection conexionDataBase = 
+                DriverManager.getConnection(App.DATABASE, "root","")){
+                Statement statement = conexionDataBase.createStatement();
+                
+                String i1 = "INSERT INTO USERS VALUES('100','admin', 'none', 'admin@', 'true', 'admin','0');";
+                
+                String i2 = "INSERT INTO USERS VALUES('1','Jaime','Roman Gil', 'jaime@g','false','0000','0');";
+                String i3 = "INSERT INTO USERS VALUES('2','Gabi', 'Carnico', 'gabicarnico@', 'false', '4321','0');";
+                String i4 = "INSERT INTO USERS VALUES('3','Damif', 'FCB', 'rompecorazones@', 'false', 'sopaGabi','0');";
+                String i5 = "INSERT INTO USERS VALUES('4','Tekila', 'Javier Ceballos', 'AlMyLoco@', 'false', 'manin','0');";
+                String i6 = "INSERT INTO USERS VALUES('5','Roo', 'C.R.', 'Rooooooooooooo@', 'true', 'levilovers','0');";
+     
+        		statement.executeUpdate(i1);
+        		statement.executeUpdate(i2);
+        		statement.executeUpdate(i3);
+        		statement.executeUpdate(i4);
+        		statement.executeUpdate(i5);
+        		statement.executeUpdate(i6);
+        		
+        		System.out.println("DATOS INSERTADOS EXITOSAMENTE");
+               
+            }catch(Exception e){
+                e.printStackTrace();
+                System.out.println("DATOS INSERTADOS FALLIDO");
+            }
+		
+    }
+    
+    private void create_table_users() {
+    	System.out.println("CREATING TABLE USERS");
+    	 try(Connection conexionDataBase = DriverManager.getConnection(App.DATABASE, "root","")){
+             Statement statement = conexionDataBase.createStatement();
+             String CREATE_TABLE_USERS = "CREATE TABLE USERS"
+            			+"(id INTEGER,"
+            			+"name VARCHAR,"
+            			+"surname VARCHAR,"
+            			+"mail VARCHAR,"
+            			+"isadmin VARCHAR,"
+            			+"pass VARCHAR,"
+            			+"id_h VARCHAR)";
+            	    
+             statement.executeUpdate(CREATE_TABLE_USERS);
+         	
+  
+         	System.out.println("TABLE USERS CREATED");
+             
+         }catch (Exception e) {e.printStackTrace();System.out.println("TABLE USERS CREATION FAILED");}
+     	
+     	
+    }
+
+    private void reset_table_users_regs() {
+    	System.out.println("reseting data in table users");
+   	 try(Connection conexionDataBase = DriverManager.getConnection(App.DATABASE, "root","")){
+            Statement statement = conexionDataBase.createStatement();
+           	    
+            statement.executeQuery("DELETE FROM TABLE USERS WHERE 'id' < 1000");
+
+        	System.out.println("data on table users deleted");
+            
+        }catch (Exception e) {e.printStackTrace();System.out.println("data on table users could not be deleted");}   	
+    }
+    
+    private void show_regs_on_start() {
+    	System.out.println("showing all data in table users");
+   	 try(Connection conexionDataBase = DriverManager.getConnection(App.DATABASE, "root","")){
+            Statement statement = conexionDataBase.createStatement();
+           	    
+            ResultSet rs = statement.executeQuery("SELECT * FROM users");
+            
+            System.out.println("-----------DATA----------");
+            while(rs.next()) {
+            	System.out.println(String.format("\tid: %s \n\tname: %s\n", rs.getInt("id"),rs.getString("name")));
+            }
+            
+
+        	System.out.println("data on table users deleted");
+            
+        }catch (Exception e) {e.printStackTrace();System.out.println("data on table users could not be deleted");}
+    }
+    
+    @Override
+	public void initialize(URL location, ResourceBundle resources) {
+		if(create_table_users) {create_table_users();}
+		if(reset_table_users_regs) {reset_table_users_regs();}
+		if(reinsert_database) {insert_sample_users();}
+		if(show_regs_on_start) {show_regs_on_start();}
+		
+	}
+    
     
 
     

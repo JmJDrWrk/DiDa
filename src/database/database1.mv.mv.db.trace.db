@@ -1,0 +1,16 @@
+2021-11-29 08:51:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USERS" no encontrada
+Table "USERS" not found; SQL statement:
+SELECT * FROM USERS WHERE name = 'admin'; [42102-200]
+2021-11-29 08:51:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USERS" no encontrada
+Table "USERS" not found; SQL statement:
+SELECT * FROM USERS WHERE name = 'admin'; [42102-200]
+2021-11-29 08:51:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USERS" no encontrada
+Table "USERS" not found; SQL statement:
+SELECT * FROM USERS WHERE name = 'admin'; [42102-200]
+2021-11-29 08:51:51 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Tabla "USERS" no encontrada
+Table "USERS" not found; SQL statement:
+SELECT * FROM USERS WHERE name = 'admin'; [42102-200]

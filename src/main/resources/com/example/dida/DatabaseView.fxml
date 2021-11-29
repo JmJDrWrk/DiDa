@@ -32,9 +32,20 @@
                         <Image url="@img/15216161911536834820-128.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="25.0" fitWidth="23.0" layoutX="825.0" layoutY="7.0" onMouseClicked="#database_settings" pickOnBounds="true" preserveRatio="true">
+
+                  <ImageView id="apple_green" fitHeight="20.0" fitWidth="20.0" layoutX="772.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@img/icons8-close-64.png" />
+                        <Image url="@img/apple_green.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="795.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/apple_yellow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="816.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/apple_red.png" />
                      </image>
                   </ImageView>
                </children>
