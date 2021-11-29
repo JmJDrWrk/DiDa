@@ -15,9 +15,29 @@
    <children>
       <Pane layoutX="198.0" prefHeight="604.0" prefWidth="852.0" styleClass="right_panel">
          <children>
+            <Pane layoutY="39.0" prefHeight="563.0" prefWidth="852.0">
+               <children>
+                  <Pane fx:id="parent_table" layoutX="45.0" layoutY="98.0" styleClass="expansionPanel" />
+               </children></Pane>
             <Pane prefHeight="39.0" prefWidth="852.0" styleClass="left_panel">
                <children>
-                  <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="12.0" layoutY="12.0" onMouseClicked="#add" pickOnBounds="true" preserveRatio="true">
+      
+                  <ImageView id="apple_green" fitHeight="20.0" fitWidth="20.0" layoutX="772.0" layoutY="10.0" onMouseClicked="#saludar" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/apple_green.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="795.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/apple_yellow.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="816.0" layoutY="10.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/apple_red.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="16.0" layoutY="12.0" onMouseClicked="#display_new_user_view" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/19431180981536834821-128.png" />
                      </image>
@@ -32,28 +52,8 @@
                         <Image url="@img/15216161911536834820-128.png" />
                      </image>
                   </ImageView>
-
-                  <ImageView id="apple_green" fitHeight="20.0" fitWidth="20.0" layoutX="772.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/apple_green.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="795.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/apple_yellow.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="816.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/apple_red.png" />
-                     </image>
-                  </ImageView>
                </children>
             </Pane>
-            <Pane layoutY="39.0" prefHeight="563.0" prefWidth="852.0">
-               <children>
-                  <Pane fx:id="parent_table" layoutX="45.0" layoutY="98.0" />
-               </children></Pane>
          </children></Pane>
       <Pane prefHeight="604.0" prefWidth="199.0" styleClass="left_panel">
          <children>
@@ -159,7 +159,7 @@
                   <Image url="@img/icons8-smart-home-automation-48.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="314.0" layoutY="12.0" onMouseClicked="#refresh_database" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="314.0" layoutY="12.0" onMouseClicked="#display_new_user_view" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/14446879061536834824-128.png" />
                </image>

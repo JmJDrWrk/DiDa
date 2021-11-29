@@ -1,5 +1,6 @@
 package com.example.dida;
 
+import java.awt.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -15,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -41,10 +43,15 @@ public class DatabaseController implements Initializable{
     
 	@FXML TableView<Users> table;
 	
+	@FXML Pane children_pane;
+	
 	@FXML Pane parent_table;
 	
-
+	@FXML Button new_user_view;
     
+	public void saludar() {
+		System.out.println("hola!");
+	}
     
     public void GET_USERS() {
     	System.out.println("data: " + usersOptionPane.getScene().getRoot());
@@ -85,30 +92,37 @@ public class DatabaseController implements Initializable{
         }
     }
     
-    public void add(MouseEvent mouseEvent) {
-        System.out.println("Adding selected  -- ONLY IF A TABLE SELECTED\n\tDISPLAY ADD TO TABLE WINDOW");
-		
-		//CONSTANTES
-		
-		String DATABASE = "jdbc:h2:E:/DATABASES/database1.mv";
-		
-		//SQL
-		
-		String obtener = "SELECT * FROM USERS;";
 
-		//DEVOLVER 2
-        try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
-            Statement statement = conexionDataBase.createStatement();
-        	ResultSet rs = statement.executeQuery(obtener);
-        	while(rs.next()) {
-        		System.out.println(rs.getString("id"));
-        	}
-            System.out.println("devuelto");
-        }catch (Exception e) {
-        	e.printStackTrace();
-        	System.out.println("Devolucion 2 fallida");
-        }
+	public void display_new_user_view() {
+        System.out.println("new user view");
+        changePane("new_test");
+
+//		
+//		//CONSTANTES
+//		
+//		String DATABASE = "jdbc:h2:E:/DATABASES/database1.mv";
+//		
+//		//SQL
+//		
+//		String obtener = "SELECT * FROM USERS;";
+//
+//		//DEVOLVER 2
+//        try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
+//            Statement statement = conexionDataBase.createStatement();
+//        	ResultSet rs = statement.executeQuery(obtener);
+//        	while(rs.next()) {
+//        		System.out.println(rs.getString("id"));
+//        	}
+//            System.out.println("devuelto");
+//        }catch (Exception e) {
+//        	e.printStackTrace();
+//        	System.out.println("Devolucion 2 fallida");
+//        }
     }
+	
+	public void exit() {
+		System.exit(0);
+	}
 
     public void edit(MouseEvent mouseEvent) {
         System.out.println("Delete selected  -- ONLY IF A TABLE REGISTRY SELECTED\n\tDISPLAY EDIT REG ON TABLE");
@@ -138,10 +152,55 @@ public class DatabaseController implements Initializable{
                 e.printStackTrace();
                 System.out.println("DATOS INSERTADOS FALLIDO");
             }
+    	
+
+    	
     }
-    
+    private void changePane(String fxml) {
+        
+        System.out.println("CREATING " + fxml + " TABLE");
+        
+        System.out.println(parent_table.getChildren());
+        
+        try{table.setVisible(false);
+        	table.refresh();
+        	}catch(Exception e) {System.out.println("table to false failed");}
+        ObservableList<Node> children = null;
+        try {
+        	children = parent_table.getChildren();
+        	System.out.println("Elemento hijo obtenido");
+        }catch(Exception e) {
+        	System.out.println("failed to obtain children from parent_table");
+        }
+        try{children.get(0).setVisible(false);table.refresh();}catch(Exception e) {System.out.println("No se pudo settear la visibilidad del elemento hijo");}
+        
+        Pane oldPane = null;
+        Pane newPane = null;
+        
+        try {oldPane = FXMLLoader.load(getClass().getResource(fxml + ".fxml")); 
+        oldPane.setVisible(false);
+        System.out.println("old pane obtenido");}
+        catch (IOException e1) {
+        	System.out.println("pane not found");} 
+        
+        try {
+        	newPane = FXMLLoader.load(getClass().getResource(fxml + ".fxml"));
+        	children_pane = newPane;
+        }
+        catch (IOException e1) {e1.printStackTrace(); System.out.println("newPane error");}
+        
+        try {
+    		parent_table.getChildren().add(newPane);
+    	} catch (Exception e) {
+    		System.out.println("failed to add new pane to parent_table");
+    	}
+        
+    } 
     private void changeTable(String fxml) {
         
+        try{table.setVisible(false);
+        	table.refresh();
+        	}catch(Exception e) {System.out.println("table to false failed");}
         System.out.println("CREATING " + fxml + " TABLE");
         
         //hide by children
@@ -245,6 +304,20 @@ private void configurarTamanhoColumnas() {
 
     
     
-    
+//NEW USER METHODS
+@FXML TextField new_user_name;
+@FXML TextField new_user_surname;
+@FXML TextField new_user_mail;
+@FXML ComboBox<String> new_user_admin;
+@FXML TextField new_user_idh;
+@FXML Button select_profile_image;
+@FXML Button add_user;
+public void select_profile_image() {
+	System.out.println("select profile image");
+}
+
+public void add_user() {
+	System.out.println("add user");
+}
     
 }

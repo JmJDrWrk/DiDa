@@ -11,6 +11,7 @@ module com.example.dida {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
 	requires javafx.graphics;
+	requires java.desktop;
 
     opens com.example.dida to javafx.fxml;
     exports com.example.dida;
