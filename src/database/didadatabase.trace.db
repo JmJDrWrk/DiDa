@@ -173,3 +173,98 @@ DELETE FROM TABLE USERS WHERE 'id' < 1000 [42001-200]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "DELETE FROM TABLE[*] USERS WHERE 'id' < 1000"; se esperaba "identifier"
 Syntax error in SQL statement "DELETE FROM TABLE[*] USERS WHERE 'id' < 1000"; expected "identifier"; SQL statement:
 DELETE FROM TABLE USERS WHERE 'id' < 1000 [42001-200]
+2021-11-30 13:28:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Columna "CUSTOMERID" no encontrada
+Column "CUSTOMERID" not found; SQL statement:
+UPDATE users SET Name = 'admin', Surname= 'none', Mail = 'admin@' , pass = 'admin' WHERE CustomerID = 100; [42122-200]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:453)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:429)
+	at org.h2.message.DbException.get(DbException.java:205)
+	at org.h2.message.DbException.get(DbException.java:181)
+	at org.h2.expression.ExpressionColumn.getColumnException(ExpressionColumn.java:163)
+	at org.h2.expression.ExpressionColumn.optimize(ExpressionColumn.java:145)
+	at org.h2.expression.condition.Comparison.optimize(Comparison.java:190)
+	at org.h2.command.dml.Update.prepare(Update.java:266)
+	at org.h2.command.Parser.prepareCommand(Parser.java:744)
+	at org.h2.engine.Session.prepareLocal(Session.java:657)
+	at org.h2.engine.Session.prepareCommand(Session.java:595)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1235)
+	at org.h2.jdbc.JdbcStatement.executeUpdateInternal(JdbcStatement.java:164)
+	at org.h2.jdbc.JdbcStatement.executeUpdate(JdbcStatement.java:126)
+	at com.example.dida/com.example.dida.ScpecificController.SAVE(ScpecificController.java:38)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:77)
+	at jdk.internal.reflect.GeneratedMethodAccessor2.invoke(Unknown Source)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:564)
+	at javafx.base/com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:275)
+	at javafx.fxml/com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml/javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1854)
+	at javafx.fxml/javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1724)
+	at javafx.base/com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at javafx.base/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+	at javafx.base/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at javafx.base/com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at javafx.base/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at javafx.base/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base/com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at javafx.base/com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.base/javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.graphics/javafx.scene.Scene$ClickGenerator.postProcess(Scene.java:3602)
+	at javafx.graphics/javafx.scene.Scene$MouseHandler.process(Scene.java:3906)
+	at javafx.graphics/javafx.scene.Scene.processMouseEvent(Scene.java:1878)
+	at javafx.graphics/javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2623)
+	at javafx.graphics/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411)
+	at javafx.graphics/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:391)
+	at javafx.graphics/com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450)
+	at javafx.graphics/com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
+	at javafx.graphics/com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449)
+	at javafx.graphics/com.sun.glass.ui.View.handleMouseEvent(View.java:557)
+	at javafx.graphics/com.sun.glass.ui.View.notifyMouse(View.java:943)
+	at javafx.graphics/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:184)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+2021-11-30 13:39:01 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"
+Syntax error in SQL statement "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"; SQL statement:
+INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0'); [42000-200]
+2021-11-30 13:39:28 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"
+Syntax error in SQL statement "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"; SQL statement:
+INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0'); [42000-200]
+2021-11-30 13:39:36 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"
+Syntax error in SQL statement "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"; SQL statement:
+INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0'); [42000-200]
+2021-11-30 13:45:46 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"
+Syntax error in SQL statement "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"; SQL statement:
+INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0'); [42000-200]
+2021-11-30 13:46:18 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"
+Syntax error in SQL statement "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"; SQL statement:
+INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0'); [42000-200]
+2021-11-30 13:47:23 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"
+Syntax error in SQL statement "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"; SQL statement:
+INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0'); [42000-200]
+2021-11-30 13:48:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"
+Syntax error in SQL statement "INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0[*]');"; SQL statement:
+INSERT INTO USERS('name','surname','mail,'isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0'); [42000-200]
+2021-11-30 13:49:48 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO USERS('name'[*],'surname','mail','isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0');"; se esperaba "identifier"
+Syntax error in SQL statement "INSERT INTO USERS('name'[*],'surname','mail','isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0');"; expected "identifier"; SQL statement:
+INSERT INTO USERS('name','surname','mail','isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0'); [42001-200]
+2021-11-30 13:49:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "INSERT INTO USERS('name'[*],'surname','mail','isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0');"; se esperaba "identifier"
+Syntax error in SQL statement "INSERT INTO USERS('name'[*],'surname','mail','isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0');"; expected "identifier"; SQL statement:
+INSERT INTO USERS('name','surname','mail','isadmin','pass','id_h') VALUES('admin', 'none', 'admin@', 'true', 'admin','0'); [42001-200]

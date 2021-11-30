@@ -85,7 +85,9 @@ public class LoginController implements Initializable{
         	try(Connection conexionDataBase = 
                     DriverManager.getConnection(App.DATABASE, "root","")){
                     Statement statement = conexionDataBase.createStatement();
-                    String i1 = String.format("INSERT INTO USERS VALUES('100','%s', 'none', 'admin@', 'true', '%s','0');",user.getText(), pass.getText());
+                    
+                    
+                    String i1 = String.format("INSERT INTO USERS(name,surname,mail,isadmin,pass,id_h) VALUES('%s', 'none', 'admin@', 'true', '%s','0');",user.getText(), pass.getText());
 
             		statement.executeUpdate(i1);
      
@@ -335,7 +337,28 @@ public class LoginController implements Initializable{
 		if(reinsert_database) {insert_sample_users();}
 		if(show_regs_on_start) {show_regs_on_start();}
 		
-	}
+	        try(Connection conexionDataBase = DriverManager.getConnection(App.DATABASE, "root","")){
+	            Statement statement = conexionDataBase.createStatement();
+	        	try {
+	        		statement.executeUpdate(SQL_SENTENCE.DROP_TABLE_USERS);
+				} catch (Exception e) {
+					System.out.println("DELETE FAILED");
+				}
+	        	 try {
+	        		 statement.executeUpdate(SQL_SENTENCE.CREATE_TABLE_USERS);
+				} catch (Exception e) {
+					System.out.println("CREATE FAILED");
+				}
+	             
+
+	        }catch (Exception e) {
+	        	e.printStackTrace();
+	        	
+	        }
+		}
+      
+		
+	
     
     
 

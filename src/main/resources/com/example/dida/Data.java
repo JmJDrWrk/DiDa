@@ -2,7 +2,7 @@
 
 public class SQL_HISTORIAL{
     private String CREATE_TABLE_USERS = "CREATE TABLE USERS"
-		+"(id INTEGER,"
+		+"(id INTEGER auto_increment,"
 		+"name VARCHAR,"
 		+"surname VARCHAR,"
 		+"mail VARCHAR,"

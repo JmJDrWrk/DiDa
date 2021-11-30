@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="left_panel" stylesheets="@MainViewStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="left_panel" stylesheets="@MainViewStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.dida.ScpecificController">
    <children>
       <VBox layoutX="36.0" layoutY="50.0" prefHeight="284.0" prefWidth="166.0" spacing="20.0">
          <children>
@@ -40,7 +40,7 @@
                   <Font size="20.0" />
                </font>
             </Label>
-            <Label id="blue_label" text="id_h">
+            <Label id="blue_label" text="pass">
                <font>
                   <Font size="20.0" />
                </font>
@@ -72,10 +72,10 @@
                   </FXCollections>
                </items>
             </ComboBox>
-            <TextField id="white_text" fx:id="new_user_idh" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="175.0" styleClass="table-view" />
+            <TextField id="white_text" fx:id="new_user_pass" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="175.0" styleClass="table-view" />
          </children>
       </VBox>
       <Button fx:id="select_profile_image" layoutX="529.0" layoutY="206.0" mnemonicParsing="false" text="Select" />
-      <Button id="loginbutton" fx:id="add_user" layoutX="462.0" layoutY="300.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="91.0" text="Add" />
+      <Button id="loginbutton" fx:id="add_user" layoutX="462.0" layoutY="300.0" mnemonicParsing="false" onMouseClicked="#SAVE" prefHeight="28.0" prefWidth="91.0" text="Add" />
    </children>
 </Pane>

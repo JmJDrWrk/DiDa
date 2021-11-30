@@ -22,9 +22,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 
 public class DatabaseController implements Initializable{
-	
+	public static Users selected_user;
     private String USERS_CREATE = 
     		"CREATE TABLE USERS"
     		+"(id INTEGER,"
@@ -48,7 +49,8 @@ public class DatabaseController implements Initializable{
 	@FXML Pane parent_table;
 	
 	@FXML Button new_user_view;
-    
+
+
 	public void saludar() {
 		System.out.println("hola!");
 	}
@@ -124,8 +126,13 @@ public class DatabaseController implements Initializable{
 		System.exit(0);
 	}
 
+    
+
     public void edit(MouseEvent mouseEvent) {
-        System.out.println("Delete selected  -- ONLY IF A TABLE REGISTRY SELECTED\n\tDISPLAY EDIT REG ON TABLE");
+       System.out.println("Edit");
+       DatabaseController.selected_user = table.getSelectionModel().getSelectedItem();
+       changePane("new_test");
+       	
     }
 
     public void delete(MouseEvent mouseEvent) {
@@ -303,15 +310,7 @@ private void configurarTamanhoColumnas() {
     }
 
     
-    
-//NEW USER METHODS
-@FXML TextField new_user_name;
-@FXML TextField new_user_surname;
-@FXML TextField new_user_mail;
-@FXML ComboBox<String> new_user_admin;
-@FXML TextField new_user_idh;
-@FXML Button select_profile_image;
-@FXML Button add_user;
+
 public void select_profile_image() {
 	System.out.println("select profile image");
 }

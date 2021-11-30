@@ -19,7 +19,7 @@ public class App extends Application {
         scene = new Scene(fxmlLoader.load(), 1050, 604);
         stage.setTitle("Hello!");
         stage.setScene(scene);
-        stage.initStyle(StageStyle.UNDECORATED);
+        //stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 
