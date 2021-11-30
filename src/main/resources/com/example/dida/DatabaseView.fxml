@@ -146,12 +146,17 @@
             </ImageView>
             <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="314.0" layoutY="12.0" onMouseClicked="#display_new_user_view" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@img/14446879061536834824-128.png" />
+                  <Image url="@img/19431180981536834821-128.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="286.0" layoutY="12.0" onMouseClicked="#edit" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="286.0" layoutY="12.0" onMouseClicked="#add_user" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/19653542211536834823-128.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="254.0" layoutY="12.0" onMouseClicked="#delete" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/11328750001536834821-128.png" />
                </image>
             </ImageView>
          </children>

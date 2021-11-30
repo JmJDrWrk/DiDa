@@ -25,6 +25,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class DatabaseController implements Initializable{
+	static boolean is_new = false;
+	String i = "\u001b[1;96m";
+	String f = "\u001b[0m";
 	public static Users selected_user;
     private String USERS_CREATE = 
     		"CREATE TABLE USERS"
@@ -50,7 +53,75 @@ public class DatabaseController implements Initializable{
 	
 	@FXML Button new_user_view;
 
+    private void changePane(String fxml) {
+    	
+        System.out.println("changing Pane to " + fxml);
+        
+        System.out.println(parent_table.getChildren());
+        
+        try{table.setVisible(false);
+        	table.refresh();
+        	}catch(Exception e) {System.out.println("table to false failed");}
+        ObservableList<Node> children = null;
+        try {
+        	children = parent_table.getChildren();
+        	System.out.println("Elemento hijo obtenido");
+        }catch(Exception e) {
+        	System.out.println("failed to obtain children from parent_table");
+        }
+        try{children.get(0).setVisible(false);table.refresh();}catch(Exception e) {System.out.println("No se pudo settear la visibilidad del elemento hijo");}
+        
+        Pane oldPane = null;
+        Pane newPane = null;
+        
+        try {oldPane = FXMLLoader.load(getClass().getResource(fxml + ".fxml")); 
+        oldPane.setVisible(false);
+        System.out.println("old pane obtenido");}
+        catch (IOException e1) {
+        	System.out.println("pane not found");} 
+        
+        try {
+        	newPane = FXMLLoader.load(getClass().getResource(fxml + ".fxml"));
+        	children_pane = newPane;
+        }
+        catch (IOException e1) {e1.printStackTrace(); System.out.println("newPane error");}
+        
+        try {
+    		parent_table.getChildren().add(newPane);
+    	} catch (Exception e) {
+    		System.out.println("failed to add new pane to parent_table");
+    	}
+        
+    } 
+    private void changeTable(String fxml) {
+        System.out.println("changin table to " + fxml);
+        try{table.setVisible(false);
+        	table.refresh();
+        	}catch(Exception e) {System.out.println("table to false failed");}
+        System.out.println("CREATING " + fxml + " TABLE");
+        
+        //hide by children
+        ObservableList<Node> children = parent_table.getChildren();
+        try{children.get(0).setVisible(false);}catch(Exception e) {System.out.println("No se pudo obtener el elemento hijo");}
+        
+        TableView<Users> oldTable = null;
+        TableView<Users> newTable = null;
+        
+        try {oldTable = FXMLLoader.load(getClass().getResource(fxml + ".fxml")); 
+        	oldTable.setVisible(false);}
+        catch (IOException e1) {
+        	System.out.println("table not found");} 
+        
+        try {
+        	newTable = FXMLLoader.load(getClass().getResource(fxml + ".fxml"));
+        	table = newTable;
+        }
+        catch (IOException e1) {e1.printStackTrace(); System.out.println("newTable error");}
 
+       
+        parent_table.getChildren().add(newTable);
+    }
+    
 	public void saludar() {
 		System.out.println("hola!");
 	}
@@ -96,47 +167,50 @@ public class DatabaseController implements Initializable{
     
 
 	public void display_new_user_view() {
+		DatabaseController.is_new = true;
+		DatabaseController.selected_user = new Users();
         System.out.println("new user view");
         changePane("new_test");
-
-//		
-//		//CONSTANTES
-//		
-//		String DATABASE = "jdbc:h2:E:/DATABASES/database1.mv";
-//		
-//		//SQL
-//		
-//		String obtener = "SELECT * FROM USERS;";
-//
-//		//DEVOLVER 2
-//        try(Connection conexionDataBase = DriverManager.getConnection(DATABASE, "root","")){
-//            Statement statement = conexionDataBase.createStatement();
-//        	ResultSet rs = statement.executeQuery(obtener);
-//        	while(rs.next()) {
-//        		System.out.println(rs.getString("id"));
-//        	}
-//            System.out.println("devuelto");
-//        }catch (Exception e) {
-//        	e.printStackTrace();
-//        	System.out.println("Devolucion 2 fallida");
-//        }
+        
     }
 	
 	public void exit() {
 		System.exit(0);
 	}
 
-    
+	public void add_user() {
+	   DatabaseController.is_new = true;
+	   System.out.println("Edit");
+	   DatabaseController.selected_user = table.getSelectionModel().getSelectedItem();
+	   changePane("new_test");
+	}
+  
 
     public void edit(MouseEvent mouseEvent) {
-       System.out.println("Edit");
-       DatabaseController.selected_user = table.getSelectionModel().getSelectedItem();
-       changePane("new_test");
+	   DatabaseController.is_new = false;
+	   System.out.println("Edit");
+	   DatabaseController.selected_user = table.getSelectionModel().getSelectedItem();
+	   changePane("new_test");
        	
     }
 
     public void delete(MouseEvent mouseEvent) {
-        System.out.println("Delete selected  -- ONLY IF A TABLE REGISTRY SELECTED");
+        System.out.println("Delete");
+        DatabaseController.selected_user = table.getSelectionModel().getSelectedItem();
+        String sql = "DELETE FROM USERS WHERE id = " + selected_user.getId();
+        try(Connection conexionDataBase = DriverManager.getConnection(App.DATABASE, "root","")){
+            Statement statement = conexionDataBase.createStatement();
+            System.out.println("profile edited");
+        	System.out.println("SQL:  " + sql);
+            statement.executeUpdate(sql);
+
+        }catch (Exception e) {
+        	e.printStackTrace();
+        	System.out.println("SQL:  " + sql);
+        }
+        changeTable("users_table");
+        GET_USERS();
+        table.refresh();
     }
 
     public void database_settings(MouseEvent mouseEvent) {
@@ -163,75 +237,7 @@ public class DatabaseController implements Initializable{
 
     	
     }
-    private void changePane(String fxml) {
-        
-        System.out.println("CREATING " + fxml + " TABLE");
-        
-        System.out.println(parent_table.getChildren());
-        
-        try{table.setVisible(false);
-        	table.refresh();
-        	}catch(Exception e) {System.out.println("table to false failed");}
-        ObservableList<Node> children = null;
-        try {
-        	children = parent_table.getChildren();
-        	System.out.println("Elemento hijo obtenido");
-        }catch(Exception e) {
-        	System.out.println("failed to obtain children from parent_table");
-        }
-        try{children.get(0).setVisible(false);table.refresh();}catch(Exception e) {System.out.println("No se pudo settear la visibilidad del elemento hijo");}
-        
-        Pane oldPane = null;
-        Pane newPane = null;
-        
-        try {oldPane = FXMLLoader.load(getClass().getResource(fxml + ".fxml")); 
-        oldPane.setVisible(false);
-        System.out.println("old pane obtenido");}
-        catch (IOException e1) {
-        	System.out.println("pane not found");} 
-        
-        try {
-        	newPane = FXMLLoader.load(getClass().getResource(fxml + ".fxml"));
-        	children_pane = newPane;
-        }
-        catch (IOException e1) {e1.printStackTrace(); System.out.println("newPane error");}
-        
-        try {
-    		parent_table.getChildren().add(newPane);
-    	} catch (Exception e) {
-    		System.out.println("failed to add new pane to parent_table");
-    	}
-        
-    } 
-    private void changeTable(String fxml) {
-        
-        try{table.setVisible(false);
-        	table.refresh();
-        	}catch(Exception e) {System.out.println("table to false failed");}
-        System.out.println("CREATING " + fxml + " TABLE");
-        
-        //hide by children
-        ObservableList<Node> children = parent_table.getChildren();
-        try{children.get(0).setVisible(false);}catch(Exception e) {System.out.println("No se pudo obtener el elemento hijo");}
-        
-        TableView<Users> oldTable = null;
-        TableView<Users> newTable = null;
-        
-        try {oldTable = FXMLLoader.load(getClass().getResource(fxml + ".fxml")); 
-        	oldTable.setVisible(false);}
-        catch (IOException e1) {
-        	System.out.println("table not found");} 
-        
-        try {
-        	newTable = FXMLLoader.load(getClass().getResource(fxml + ".fxml"));
-        	table = newTable;
-        }
-        catch (IOException e1) {e1.printStackTrace(); System.out.println("newTable error");}
 
-       
-        parent_table.getChildren().add(newTable);
-    }
-    
     public void users_ts(MouseEvent mouseEvent) {
     	//Cambiar a tabla usuarios
 		changeTable("users_table");
@@ -286,12 +292,7 @@ public class DatabaseController implements Initializable{
 		}else {
 			System.out.println("is admin was: " + LoginController.current_user.isIsadmin());
 		}
-		
-		//NO LOAD ANY TABLE
-		
-		
-		
-		
+			
 	}
     
 private void configurarTamanhoColumnas() {
@@ -309,14 +310,16 @@ private void configurarTamanhoColumnas() {
         
     }
 
-    
+
 
 public void select_profile_image() {
 	System.out.println("select profile image");
 }
 
-public void add_user() {
-	System.out.println("add user");
+
+public DatabaseController() {
+	System.out.println("database controller object created");
 }
+
     
 }

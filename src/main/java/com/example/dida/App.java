@@ -10,7 +10,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class App extends Application {
-	static final String DATABASE = "jdbc:h2:./src/database/didadatabase";
+	static final String DATABASE = "jdbc:h2:C:/Users/Jaime/3D Objects/ASIGNATURAS/DISEÑO INTERFACES/DiDa/src/database/didadatabase";
     private static Scene scene;
 
     @Override
@@ -42,3 +42,4 @@ public class App extends Application {
     }
     
 }
+

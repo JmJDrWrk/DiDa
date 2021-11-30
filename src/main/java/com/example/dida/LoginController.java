@@ -24,6 +24,10 @@ import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable{
+	String ci = "\u001b[1;96m";
+	String cf = "\u001b[0m";
+	String ri = "\u001b[1;91m";
+	String rf = "\u001b[0m";
 	
 	private boolean show_regs_on_start = true;
 	private boolean reset_table_users_regs = false;
@@ -117,10 +121,11 @@ public class LoginController implements Initializable{
     	
         try(Connection conexionDataBase = DriverManager.getConnection(App.DATABASE, "root","")){
             Statement statement = conexionDataBase.createStatement();
-        	ResultSet rs = statement.executeQuery("SELECT * FROM USERS WHERE name = '" + user.getText().toString()+"';");
-        	
+        	ResultSet rs = statement.executeQuery("SELECT * FROM users WHERE name = '" +db_user+"'");
+        	if(rs.next() == false) {System.out.println("SELECT * FROM users WHERE name = '" +db_user+"'");System.out.println("NULL RESULTSET");System.exit(0);}
+        	rs = statement.executeQuery("SELECT * FROM users WHERE name = '" +db_user+"'");
         	while(rs.next()) {
-        		System.out.println("id: " + rs.getInt("id") + "\n\tname: " + rs.getString("name"));
+        		System.out.println(ci+"id: " + rs.getInt("id") + "\n\tname: " + rs.getString("name")+ci);
         		db_pass = rs.getString("pass");
         		System.out.println("The pass for user " + db_user + " is " + db_pass);
                 Users user = new Users();
@@ -134,8 +139,10 @@ public class LoginController implements Initializable{
                 user.setId_h(rs.getString("id_h"));
            
                 LoginController.current_user = user;
-
+                
         	}
+        	
+        	System.out.println("user acepted");
             System.out.println("devuelto");
             System.out.println("user: " + LoginController.current_user + " name: " + LoginController.current_user.getName() + " isadmin: " + LoginController.current_user.isIsadmin());
         }catch (Exception e) {e.printStackTrace();System.out.println("Devolucion 2 fallida");}
@@ -340,12 +347,12 @@ public class LoginController implements Initializable{
 	        try(Connection conexionDataBase = DriverManager.getConnection(App.DATABASE, "root","")){
 	            Statement statement = conexionDataBase.createStatement();
 	        	try {
-	        		statement.executeUpdate(SQL_SENTENCE.DROP_TABLE_USERS);
+	        		//statement.executeUpdate(SQL_SENTENCE.DROP_TABLE_USERS);
 				} catch (Exception e) {
 					System.out.println("DELETE FAILED");
 				}
 	        	 try {
-	        		 statement.executeUpdate(SQL_SENTENCE.CREATE_TABLE_USERS);
+	        		 //statement.executeUpdate(SQL_SENTENCE.CREATE_TABLE_USERS);
 				} catch (Exception e) {
 					System.out.println("CREATE FAILED");
 				}
